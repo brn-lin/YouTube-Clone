@@ -7,6 +7,7 @@
   min-width: 240px;
   margin-top: -55px;
   margin-right: 8px;
+  overflow-y: auto;
   scrollbar-width: thin;
 }
 
@@ -56,13 +57,13 @@
 }
 
 .sidebar-expanded__user-sign-in-button:hover {
-  background-color: rgb(230, 241, 253);
-  border-color: rgb(230, 241, 253);
+  background-color: var(--user-sign-in-button-hover-color);
+  border-color: var(--user-sign-in-button-hover-color);
 }
 
 .sidebar-expanded__avatar-icon {
   font-size: 22px;
-  color: rgb(6, 95, 212);
+  color: var(--user-sign-in-button-color);
   margin-right: 6px;
 }
 
@@ -70,7 +71,7 @@
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: rgb(6, 95, 212);
+  color: var(--user-sign-in-button-color);
 }
 
 .sidebar-expanded__footer {
@@ -89,14 +90,14 @@
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 13px;
   font-weight: 500;
-  color: rgb(96, 96, 96);
+  color: var(--sidebar-exapnded-footer-color);
   margin-right: 8px;
   text-decoration: none;
 }
 
 .sidebar-expanded__footer > .sidebar-expanded__footer-1 > a:visited,
 .sidebar-expanded__footer > .sidebar-expanded__footer-2 > a:visited {
-  color: rgb(96, 96, 96);
+  color: var(--sidebar-exapnded-footer-color);
   text-decoration: none;
 }
 

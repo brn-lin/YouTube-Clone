@@ -1,4 +1,8 @@
 body {
+  --user-sign-in-button-color: rgb(6, 95, 212);
+  --user-sign-in-button-hover-color: rgb(230, 241, 253);
+  --sidebar-row-background-color: rgb(245, 245, 245);
+  --sidebar-exapnded-footer-color: rgb(96, 96, 96);
   margin: 0;
   padding: 0;
 }

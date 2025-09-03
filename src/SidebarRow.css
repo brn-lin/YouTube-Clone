@@ -20,7 +20,7 @@
 }
 
 .sidebar-row:hover {
-  background-color: rgb(245, 245, 245);
+  background-color: var(--sidebar-row-background-color);
   border-radius: 10px;
   cursor: pointer;
 }
