@@ -106,7 +106,6 @@ function App() {
         isOverlayMode={isOverlayMode}
       />
       <div className="app__page">
-        {/* Overlay mode */}
         {isOverlayMode ? (
           <>
             {/* Show overlay mode above collapsed sidebar so grid doesn't move */}
@@ -146,8 +145,7 @@ function App() {
               )}
             </AnimatePresence>
           </>
-        ) : // Normal desktop mode
-        isSidebarExpanded ? (
+        ) : isSidebarExpanded ? (
           <SidebarExpanded />
         ) : (
           <Sidebar />
