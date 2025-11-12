@@ -1,0 +1,70 @@
+body {
+  --user-sign-in-button-color: rgb(6, 95, 212);
+  --user-sign-in-button-hover-color: rgb(230, 241, 253);
+  --sidebar-row-background-color: rgb(245, 245, 245);
+  --sidebar-exapnded-footer-color: rgb(96, 96, 96);
+  margin: 0;
+  padding: 0;
+}
+
+.app__page {
+  display: flex;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay-sidebar {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 240px;
+  background-color: white;
+  padding-left: 8px;
+  overflow-y: auto;
+}
+
+.overlay-sidebar__header {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 10px;
+}
+
+.overlay-sidebar__collapse-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  height: 42px;
+  width: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.overlay-sidebar__collapse-button:active {
+  background-color: rgb(235, 235, 235);
+}
+
+.overlay-sidebar__collapse-icon {
+  font-size: 20px !important;
+}
+
+.overlay-sidebar__logo {
+  height: 55px;
+  width: 95px;
+  margin-left: 15px;
+  object-fit: contain;
+  cursor: pointer;
+}
