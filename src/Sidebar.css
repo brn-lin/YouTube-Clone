@@ -1,0 +1,27 @@
+.sidebar {
+  flex: 0.03;
+  position: sticky;
+  z-index: 100;
+  top: 60px;
+  height: calc(100vh - 100px);
+  max-width: 56px;
+  min-width: 56px;
+  margin-top: -55px;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.sidebar__section-header {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  margin-left: 18px;
+}
+
+@media (max-width: 791px) {
+  .sidebar {
+    display: none;
+  }
+}

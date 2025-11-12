@@ -1,0 +1,30 @@
+.sidebar-row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 16px;
+  padding-bottom: 10px;
+  margin-right: -6px;
+}
+
+.sidebar-row__icon {
+  font-size: 24px !important;
+}
+
+.sidebar-row__title {
+  flex: 1;
+  font-family: "Roboto", "Noto", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.sidebar-row:hover {
+  background-color: var(--sidebar-row-background-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sidebar-row.selected > .sidebar-row__icon {
+  color: black;
+}
