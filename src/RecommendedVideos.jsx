@@ -67,7 +67,7 @@ function RecommendedVideos({ isSidebarExpanded, isOverlayMode }) {
         const videoResponse = await axios.get(PROXY_URL, {
           params: {
             endpoint: "videos",
-            part: "snippet,statistics",
+            part: "snippet,statistics,contentDetails",
             chart: "mostPopular",
             regionCode: "US",
             maxResults: 12,
@@ -165,6 +165,7 @@ function RecommendedVideos({ isSidebarExpanded, isOverlayMode }) {
             videoId={video.id.videoId || video.id}
             title={video.snippet.title}
             thumbnails={video.snippet.thumbnails}
+            duration={video.contentDetails?.duration}
             channel={video.snippet.channelTitle}
             channelId={video.snippet.channelId}
             views={formatViewCount(video.statistics?.viewCount || 0)}
