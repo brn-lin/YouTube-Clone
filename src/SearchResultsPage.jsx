@@ -53,6 +53,25 @@ function formatDate(dateString) {
   return "just now";
 }
 
+function formatDuration(iso) {
+  if (!iso) return "";
+
+  const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
+  const [, h, m, s] = iso.match(regex) || [];
+
+  const hours = parseInt(h || 0, 10);
+  const minutes = parseInt(m || 0, 10);
+  const seconds = parseInt(s || 0, 10);
+
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, "0")}:${String(
+      seconds
+    ).padStart(2, "0")}`;
+  }
+
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
 // Component for individual search results
 function SearchResultItem({ video }) {
   const [hover, setHover] = useState(false);
@@ -68,6 +87,7 @@ function SearchResultItem({ video }) {
     ? formatViewCount(video.statistics.viewCount)
     : "—";
   const date = formatDate(video.snippet.publishedAt);
+  const formattedDuration = formatDuration(video.duration);
 
   // State-based thumbnail URL
   const [thumbnailUrl, setThumbnailUrl] = useState(
@@ -138,6 +158,10 @@ function SearchResultItem({ video }) {
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
               ></iframe>
+            )}
+
+            {!hover && formattedDuration && (
+              <div className={styles.video__duration}>{formattedDuration}</div>
             )}
           </div>
         </div>
@@ -238,12 +262,16 @@ export default function SearchResultsPage() {
         const videoResponse = await axios.get(`${PROXY_URL}/youtubeProxy`, {
           params: {
             endpoint: "videos",
-            part: "statistics",
+            part: "statistics,contentDetails",
             id: videoIds.join(","),
           },
         });
+
         videoResponse.data.items.forEach((v) => {
-          videoStatsMap[v.id] = v.statistics;
+          videoStatsMap[v.id] = {
+            statistics: v.statistics,
+            duration: v.contentDetails?.duration,
+          };
         });
       }
 
@@ -274,7 +302,8 @@ export default function SearchResultsPage() {
         const channelData = channelMap[item.snippet.channelId] || {};
         return {
           ...item,
-          statistics: videoStatsMap[item.id.videoId],
+          statistics: videoStatsMap[item.id.videoId]?.statistics,
+          duration: videoStatsMap[item.id.videoId]?.duration,
           channelProfilePicture:
             channelData.profilePicture ||
             "https://www.pngmart.com/files/23/Profile-PNG-Photo.png",
