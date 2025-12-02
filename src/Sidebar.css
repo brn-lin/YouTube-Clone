@@ -6,7 +6,7 @@
   height: calc(100vh - 100px);
   max-width: 56px;
   min-width: 56px;
-  margin-top: -55px;
+  transform: translateY(-55px);
   margin-right: 8px;
   margin-left: 5px;
 }
