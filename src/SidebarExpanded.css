@@ -5,14 +5,11 @@
   top: 70px;
   height: calc(100vh - 70px);
   min-width: 240px;
-  margin-top: -55px;
+  transform: translateY(-55px);
   margin-right: 8px;
-  overflow-y: auto;
   scrollbar-width: thin;
-}
-
-.sidebar-expanded:hover {
-  overflow-y: scroll;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .sidebar-expanded__section-header {
