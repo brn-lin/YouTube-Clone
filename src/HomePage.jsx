@@ -1,13 +1,8 @@
 import React from "react";
 import RecommendedVideos from "./RecommendedVideos";
 
-function HomePage({ isSidebarExpanded, isOverlayMode }) {
-  return (
-    <RecommendedVideos
-      isSidebarExpanded={!isOverlayMode && isSidebarExpanded}
-      isOverlayMode={isOverlayMode}
-    />
-  );
+function HomePage() {
+  return <RecommendedVideos />;
 }
 
 export default HomePage;

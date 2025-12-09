@@ -8,6 +8,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./HomePage";
 import SearchResultsPage from "./SearchResultsPage";
+import { SidebarContext } from "./SidebarContext";
 
 function App() {
   const BREAKPOINT = 1312;
@@ -100,71 +101,75 @@ function App() {
   }, [isOverlayMode, isSidebarExpanded]);
 
   return (
-    <div className="app">
-      <Header
-        onToggleSidebar={toggleSidebar}
-        isSidebarExpanded={isSidebarExpanded}
-        isOverlayMode={isOverlayMode}
-      />
-      <div className="app__page">
-        {isOverlayMode ? (
-          <>
-            {/* Show overlay mode above collapsed sidebar so grid doesn't move */}
-            {isOverlayMode && <Sidebar />}
+    <SidebarContext.Provider
+      value={{
+        isSidebarExpanded,
+        isOverlayMode,
+        toggleSidebar,
+      }}
+    >
+      <div className="app">
+        <Header />
+        <div className="app__page">
+          {isOverlayMode ? (
+            <>
+              {/* Show overlay mode above collapsed sidebar so grid doesn't move */}
+              {isOverlayMode && <Sidebar />}
 
-            {/* Expanded = show overlay sidebar */}
-            <AnimatePresence>
-              {isSidebarExpanded && (
-                <>
-                  <div className="overlay" onClick={toggleSidebar}></div>
-                  <motion.div
-                    className="overlay-sidebar"
-                    initial={{ x: -240 }} // start off-screen
-                    animate={{ x: 0 }} // slide in
-                    exit={{ x: -240 }} // slide out
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                  >
-                    {/* Mini header inside the overlay sidebar */}
-                    <div className="overlay-sidebar__header">
-                      <button
-                        className="overlay-sidebar__collapse-button"
-                        onClick={toggleSidebar}
-                      >
-                        <RxHamburgerMenu className="overlay-sidebar__collapse-icon" />
-                      </button>
-                      <img
-                        className="overlay-sidebar__logo"
-                        src="https://logos-world.net/wp-content/uploads/2020/06/YouTube-Logo.png"
-                        alt="YouTube"
-                      />
-                    </div>
+              {/* Expanded = show overlay sidebar */}
+              <AnimatePresence>
+                {isSidebarExpanded && (
+                  <>
+                    <div className="overlay" onClick={toggleSidebar}></div>
+                    <motion.div
+                      className="overlay-sidebar"
+                      initial={{ x: -240 }} // start off-screen
+                      animate={{ x: 0 }} // slide in
+                      exit={{ x: -240 }} // slide out
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                    >
+                      {/* Mini header inside the overlay sidebar */}
+                      <div className="overlay-sidebar__header">
+                        <button
+                          className="overlay-sidebar__collapse-button"
+                          onClick={toggleSidebar}
+                        >
+                          <RxHamburgerMenu className="overlay-sidebar__collapse-icon" />
+                        </button>
+                        <img
+                          className="overlay-sidebar__logo"
+                          src="https://logos-world.net/wp-content/uploads/2020/06/YouTube-Logo.png"
+                          alt="YouTube"
+                        />
+                      </div>
 
-                    {/* The full sidebar content */}
-                    <SidebarExpanded />
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
-          </>
-        ) : isSidebarExpanded ? (
-          <SidebarExpanded />
-        ) : (
-          <Sidebar />
-        )}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                isSidebarExpanded={!isOverlayMode && isSidebarExpanded}
-                isOverlayMode={isOverlayMode}
-              />
-            }
-          />
-          <Route path="/results" element={<SearchResultsPage />} />
-        </Routes>
+                      {/* The full sidebar content */}
+                      <SidebarExpanded />
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </>
+          ) : isSidebarExpanded ? (
+            <SidebarExpanded />
+          ) : (
+            <Sidebar />
+          )}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  isSidebarExpanded={!isOverlayMode && isSidebarExpanded}
+                  isOverlayMode={isOverlayMode}
+                />
+              }
+            />
+            <Route path="/results" element={<SearchResultsPage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </SidebarContext.Provider>
   );
 }
 

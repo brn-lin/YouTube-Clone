@@ -8,8 +8,11 @@ import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
+import { useSidebar } from "./SidebarContext";
 
-function Header({ onToggleSidebar, isSidebarExpanded }) {
+function Header() {
+  const { toggleSidebar, isSidebarExpanded } = useSidebar();
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -169,7 +172,7 @@ function Header({ onToggleSidebar, isSidebarExpanded }) {
     <div className="header">
       <div className="header__top">
         <div className="header__left">
-          <button className="header__collapse-button" onClick={onToggleSidebar}>
+          <button className="header__collapse-button" onClick={toggleSidebar}>
             <RxHamburgerMenu className="header__collapse-icon" />
           </button>
           <img

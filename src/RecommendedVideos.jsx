@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Video from "./Video";
 import "./RecommendedVideos.css";
+import { useSidebar } from "./SidebarContext";
 
 const PROXY_URL = "https://youtubeproxy-jtzad2sm3q-uc.a.run.app";
 const MAX_VIDEOS = 100;
@@ -49,7 +50,9 @@ function formatDate(dateString) {
   return "just now";
 }
 
-function RecommendedVideos({ isSidebarExpanded, isOverlayMode }) {
+function RecommendedVideos() {
+  const { isSidebarExpanded, isOverlayMode } = useSidebar();
+
   const [videos, setVideos] = useState([]);
   const [channelMap, setChannelMap] = useState({});
   const [nextPageToken, setNextPageToken] = useState(null);
