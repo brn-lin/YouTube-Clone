@@ -30,7 +30,7 @@ exports.youtubeProxy = functions.https.onRequest((req, res) => {
 
       let response;
 
-      // ✅ Handle Suggest Queries separately
+      // Handle Suggest Queries separately
       if (endpoint === "suggestqueries.google.com/complete/search") {
         try {
           const response = await axios.get(`https://${endpoint}`, {
@@ -42,7 +42,7 @@ exports.youtubeProxy = functions.https.onRequest((req, res) => {
             responseType: "text", // Treat response as text
           });
 
-          // 🔥 Log the raw response for debugging
+          // Log the raw response for debugging
           console.log("Raw suggest response:", response.data);
 
           // Try parsing JSON (remove possible JSONP prefix)
