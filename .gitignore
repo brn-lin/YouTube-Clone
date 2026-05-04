@@ -23,11 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Firebase cache and config
-.firebase/
-
 # Frontend environment variables
 .env
-
-# Firebase config
-src/firebase.js

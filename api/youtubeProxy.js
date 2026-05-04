@@ -1,17 +1,11 @@
-const functions = require("firebase-functions");
-const cors = require("cors");
-const axios = require("axios");
-const { error } = require("firebase-functions/logger");
-require("dotenv").config();
+import cors from "cors";
+import axios from "axios";
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://yt-clone-7d295.web.app",
-];
+const allowedOrigins = ["http://localhost:5173", "https://vercel-app"];
 
 const corsHandler = cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -19,7 +13,7 @@ const corsHandler = cors({
   },
 });
 
-exports.youtubeProxy = functions.https.onRequest((req, res) => {
+export default async function handler(req, res) {
   corsHandler(req, res, async () => {
     try {
       const { endpoint, ...queryParams } = req.query;
@@ -33,7 +27,7 @@ exports.youtubeProxy = functions.https.onRequest((req, res) => {
       // Handle Suggest Queries separately
       if (endpoint === "suggestqueries.google.com/complete/search") {
         try {
-          const response = await axios.get(`https://${endpoint}`, {
+          const suggestResponse = await axios.get(`https://${endpoint}`, {
             params: queryParams,
             headers: {
               "User-Agent":
@@ -43,12 +37,12 @@ exports.youtubeProxy = functions.https.onRequest((req, res) => {
           });
 
           // Log the raw response for debugging
-          console.log("Raw suggest response:", response.data);
+          console.log("Raw suggest response:", suggestResponse.data);
 
           // Try parsing JSON (remove possible JSONP prefix)
           let data;
           try {
-            const cleaned = response.data.replace(/^\)\]\}'/, "");
+            const cleaned = suggestResponse.data.replace(/^\)\]\}'/, "");
             data = JSON.parse(cleaned);
           } catch (parseErr) {
             console.error("Failed to parse suggestions:", parseErr);
@@ -62,36 +56,39 @@ exports.youtubeProxy = functions.https.onRequest((req, res) => {
           console.error(
             "Suggest request failed:",
             err.message,
-            err.response?.data
+            err.response?.data,
           );
+
           return res.status(500).json({ error: "Failed to fetch suggestions" });
         }
-      } else {
-        // YouTube Data API
-        const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
-
-        if (!YOUTUBE_API_KEY) {
-          return res.status(500).json({ error: "Missing YouTube API key" });
-        }
-
-        response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/${endpoint}`,
-          {
-            params: {
-              ...queryParams,
-              key: YOUTUBE_API_KEY,
-            },
-          }
-        );
       }
 
-      res.json(response.data);
+      // YouTube Data API
+      const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+
+      if (!YOUTUBE_API_KEY) {
+        return res.status(500).json({ error: "Missing YouTube API key" });
+      }
+
+      response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/${endpoint}`,
+        {
+          params: {
+            ...queryParams,
+            key: YOUTUBE_API_KEY,
+          },
+        },
+      );
+
+      return res.json(response.data);
     } catch (error) {
       console.error(
         "YouTube API error:",
-        error.response?.data || error.message
+        error.response?.data || error.message,
       );
-      res.status(500).json({ error: "Failed to fetch from YouTube API" });
+      return res
+        .status(500)
+        .json({ error: "Failed to fetch from YouTube API" });
     }
   });
-});
+}

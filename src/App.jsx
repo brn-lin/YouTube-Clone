@@ -15,10 +15,10 @@ function App() {
 
   const [userExpanded, setUserExpanded] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(() =>
-    window.innerWidth > BREAKPOINT ? false : false
+    window.innerWidth > BREAKPOINT ? false : false,
   );
   const [isOverlayMode, setIsOverlayMode] = useState(
-    window.innerWidth <= BREAKPOINT
+    window.innerWidth <= BREAKPOINT,
   );
 
   const prevWidthRef = useRef(window.innerWidth);
