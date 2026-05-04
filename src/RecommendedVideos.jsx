@@ -4,7 +4,7 @@ import Video from "./Video";
 import "./RecommendedVideos.css";
 import { useSidebar } from "./SidebarContext";
 
-const PROXY_URL = "https://youtubeproxy-jtzad2sm3q-uc.a.run.app";
+const PROXY_URL = "/api/youtubeProxy";
 const MAX_VIDEOS = 100;
 
 function formatViewCount(views) {
@@ -82,7 +82,7 @@ function RecommendedVideos() {
         setVideos((prev) => {
           const existingIds = new Set(prev.map((v) => v.id.videoId || v.id));
           const newVideos = videoItems.filter(
-            (v) => !existingIds.has(v.id.videoId || v.id)
+            (v) => !existingIds.has(v.id.videoId || v.id),
           );
 
           const combined = [...prev, ...newVideos];
@@ -121,7 +121,7 @@ function RecommendedVideos() {
             "YouTube API error:",
             error.response.data.error.message,
             "Details:",
-            error.response.data.error.errors
+            error.response.data.error.errors,
           );
         } else {
           console.error("Error fetching YouTube data", error);
@@ -130,7 +130,7 @@ function RecommendedVideos() {
         setLoading(false);
       }
     },
-    [loading, hasMore]
+    [loading, hasMore],
   );
 
   useEffect(() => {
@@ -146,7 +146,7 @@ function RecommendedVideos() {
           fetchVideosAndChannels(nextPageToken);
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
 
     observer.observe(loaderRef.current);
