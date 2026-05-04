@@ -6,7 +6,7 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import he from "he";
 
-const PROXY_URL = "https://youtubeproxy-jtzad2sm3q-uc.a.run.app";
+const PROXY_URL = "/api/youtubeProxy";
 const MAX_RESULTS = 100;
 
 // Helper functions
@@ -65,7 +65,7 @@ function formatDuration(iso) {
 
   if (hours > 0) {
     return `${hours}:${String(minutes).padStart(2, "0")}:${String(
-      seconds
+      seconds,
     ).padStart(2, "0")}`;
   }
 
@@ -93,7 +93,7 @@ function SearchResultItem({ video }) {
   const [thumbnailUrl, setThumbnailUrl] = useState(
     video.snippet.thumbnails.high?.url ||
       video.snippet.thumbnails.medium?.url ||
-      video.snippet.thumbnails.default?.url
+      video.snippet.thumbnails.default?.url,
   );
 
   // Check if maxresthumbnail exists, upgrade if available
@@ -178,7 +178,7 @@ function SearchResultItem({ video }) {
                 e.stopPropagation(); // prevent parent <a> from firing
                 e.preventDefault(); // prevent navigation to video
                 window.location.assign(
-                  `https://www.youtube.com/channel/${video.snippet.channelId}`
+                  `https://www.youtube.com/channel/${video.snippet.channelId}`,
                 );
               }}
             >
@@ -203,7 +203,7 @@ function SearchResultItem({ video }) {
               {he.decode(
                 video.snippet.description.length > 121
                   ? video.snippet.description.slice(0, 121) + "..."
-                  : video.snippet.description
+                  : video.snippet.description,
               )}
             </p>
           </div>
@@ -315,7 +315,7 @@ export default function SearchResultsPage() {
         setResults((prev) => {
           const existingIds = new Set(prev.map((v) => v.id.videoId));
           const newUnique = enrichedResults.filter(
-            (v) => !existingIds.has(v.id.videoId)
+            (v) => !existingIds.has(v.id.videoId),
           );
 
           const combined = [...prev, ...newUnique];
