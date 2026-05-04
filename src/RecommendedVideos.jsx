@@ -4,7 +4,7 @@ import Video from "./Video";
 import "./RecommendedVideos.css";
 import { useSidebar } from "./SidebarContext";
 
-const PROXY_URL = "/api/youtubeProxy";
+const PROXY_URL =
 const MAX_VIDEOS = 100;
 
 function formatViewCount(views) {
