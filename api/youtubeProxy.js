@@ -1,7 +1,10 @@
 import cors from "cors";
 import axios from "axios";
 
-const allowedOrigins = ["http://localhost:5173", "https://vercel-app"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://youtube-clone-blue-gamma.vercel.app/",
+];
 
 const corsHandler = cors({
   origin: (origin, callback) => {
