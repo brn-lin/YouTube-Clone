@@ -66,8 +66,6 @@ export default async function handler(req, res) {
         }
       }
 
-      console.log("KEY EXISTS:", !!process.env.YOUTUBE_API_KEY);
-
       // YouTube Data API
       const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
