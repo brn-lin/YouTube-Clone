@@ -78,7 +78,13 @@ function RecommendedVideos() {
           },
         });
 
-        const videoItems = videoResponse.data.items;
+        const videoItems = videoResponse.data?.items || [];
+
+        if (!videoItems.length) {
+          console.warn("No videos returned");
+          return;
+        }
+
         setVideos((prev) => {
           const existingIds = new Set(prev.map((v) => v.id.videoId || v.id));
           const newVideos = videoItems.filter(
