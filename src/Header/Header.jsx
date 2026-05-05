@@ -8,7 +8,7 @@ import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
-import { useSidebar } from "./SidebarContext";
+import { useSidebar } from "../Sidebar/SidebarContext";
 
 function Header() {
   const { toggleSidebar, isSidebarExpanded } = useSidebar();
@@ -75,7 +75,7 @@ function Header() {
             ds: "yt",
             q: query,
           },
-        }
+        },
       );
 
       // ignore results if user cleared or changed the query
@@ -156,7 +156,7 @@ function Header() {
     if (searchText.trim()) {
       setShowSuggestions(false);
       navigate(
-        `/results?search_query=${searchText.trim().replace(/\s+/g, "+")}`
+        `/results?search_query=${searchText.trim().replace(/\s+/g, "+")}`,
       );
     }
   };
@@ -254,7 +254,7 @@ function Header() {
 
                       if (newIndex === -1) {
                         setSearchText(
-                          prev === -1 ? originalText : suggestions[prev]
+                          prev === -1 ? originalText : suggestions[prev],
                         );
                       } else {
                         setSearchText(suggestions[newIndex]);

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import SidebarExpanded from "./SidebarExpanded";
+import Header from "./Header/Header";
+import Sidebar from "./Sidebar/Sidebar";
+import SidebarExpanded from "./Sidebar/SidebarExpanded";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
-import HomePage from "./HomePage";
-import SearchResultsPage from "./SearchResultsPage";
-import { SidebarContext } from "./SidebarContext";
+import HomePage from "./Feed/HomePage";
+import SearchResultsPage from "./Feed/SearchResultsPage";
+import { SidebarContext } from "./Sidebar/SidebarContext";
 
 function App() {
   const BREAKPOINT = 1312;

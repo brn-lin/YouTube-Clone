@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Video from "./Video";
 import "./RecommendedVideos.css";
-import { useSidebar } from "./SidebarContext";
+import { useSidebar } from "../Sidebar/SidebarContext";
 
 const PROXY_URL = "/api/youtubeProxy";
 const MAX_VIDEOS = 100;
