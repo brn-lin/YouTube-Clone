@@ -8,4 +8,4 @@ A frontend YouTube clone built with React, featuring a responsive home feed, sea
 
 ## Screenshots
 
-![Screenshot](images/YouTube%20Clone%20Demo%20Screenshot.png)
+![Homepage](images/YouTube-Clone-Homepage.png)
