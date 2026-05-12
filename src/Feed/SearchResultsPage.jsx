@@ -241,7 +241,7 @@ export default function SearchResultsPage() {
         setError(null);
       }
 
-      const searchResponse = await axios.get(`${PROXY_URL}/youtubeProxy`, {
+      const searchResponse = await axios.get(PROXY_URL, {
         params: {
           endpoint: "search",
           part: "snippet",
@@ -259,7 +259,7 @@ export default function SearchResultsPage() {
       // Video stats
       let videoStatsMap = {};
       if (videoIds.length) {
-        const videoResponse = await axios.get(`${PROXY_URL}/youtubeProxy`, {
+        const videoResponse = await axios.get(PROXY_URL, {
           params: {
             endpoint: "videos",
             part: "statistics,contentDetails",
@@ -278,7 +278,7 @@ export default function SearchResultsPage() {
       // Channel thumbnails
       let channelMap = {};
       if (channelIds.length) {
-        const channelResponse = await axios.get(`${PROXY_URL}/youtubeProxy`, {
+        const channelResponse = await axios.get(PROXY_URL, {
           params: {
             endpoint: "channels",
             part: "snippet, status",
