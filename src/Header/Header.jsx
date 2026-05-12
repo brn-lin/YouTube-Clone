@@ -57,7 +57,9 @@ function Header() {
     "Original video animation",
   ];
 
-  // 🧠 Fetch suggestions (YouTube's unofficial endpoint)
+  const PROXY_URL = "/api/youtubeProxy";
+
+  // Fetch suggestions (YouTube's unofficial endpoint)
   const fetchSuggestions = async (query) => {
     if (!query.trim()) {
       setSuggestions([]);
@@ -66,24 +68,21 @@ function Header() {
 
     const currentQuery = query; // capture for comparison
     try {
-      const res = await axios.get(
-        "https://us-central1-yt-clone-7d295.cloudfunctions.net/youtubeProxy",
-        {
-          params: {
-            endpoint: "suggestqueries.google.com/complete/search",
-            client: "firefox",
-            ds: "yt",
-            q: query,
-          },
+      const res = await axios.get(PROXY_URL, {
+        params: {
+          endpoint: "suggestqueries.google.com/complete/search",
+          client: "firefox",
+          ds: "yt",
+          q: query,
         },
-      );
+      });
 
       // ignore results if user cleared or changed the query
       if (currentQuery !== searchText.trim()) return;
 
       setSuggestions(res.data[1] || []);
     } catch (err) {
-      console.error("❌ Suggestion fetch error:", err);
+      console.error("Suggestion fetch error:", err);
     }
   };
 
@@ -109,7 +108,7 @@ function Header() {
     };
   }, [searchText]);
 
-  // 🖱️ Close dropdown if user clicks outside
+  // Close dropdown if user clicks outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -161,7 +160,7 @@ function Header() {
     }
   };
 
-  // ✅ Handle selecting a suggestion
+  // Handle selecting a suggestion
   const handleSelectSuggestion = (suggestion) => {
     setSearchText(suggestion);
     setShowSuggestions(false);
@@ -243,10 +242,10 @@ function Header() {
                     setSelectedIndex((prev) => {
                       let newIndex;
                       if (prev === -1) {
-                        // 👇 Jump to the last suggestion when nothing is selected
+                        // Jump to the last suggestion when nothing is selected
                         newIndex = suggestions.length - 1;
                       } else {
-                        // 👇 Otherwise go up normally
+                        // Otherwise go up normally
                         newIndex = prev > 0 ? prev - 1 : -1;
                       }
 
@@ -301,7 +300,7 @@ function Header() {
               <CiSearch className="header__search-button-icon" />
             </button>
 
-            {/* 🧠 Suggestion dropdown */}
+            {/* Suggestion dropdown */}
             {showSuggestions && suggestions.length > 0 && (
               <ul className="header__search-suggestions-dropdown">
                 {suggestions.map((s, i) => (
