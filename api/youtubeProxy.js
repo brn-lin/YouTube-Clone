@@ -3,7 +3,7 @@ import axios from "axios";
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://youtube-clone-blue-gamma.vercel.app/",
+  "https://youtube-clone-blue-gamma.vercel.app",
 ];
 
 const corsHandler = cors({
