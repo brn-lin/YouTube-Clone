@@ -1,6 +1,6 @@
 # YouTube Clone
 
-A frontend YouTube clone built with React, featuring a responsive home feed, search with autocomplete, search results with video previews, and a fully responsive sidebar — powered by the YouTube Data API v3.
+A YouTube clone built with React and a Vercel serverless backend proxy, featuring responsive video feeds, infinite scrolling, search autocomplete with live suggestions, a dynamic sidebar, and interactive video previews. Powered by the YouTube Data API v3 on the backend.
 
 ## Live Demo
 
@@ -16,21 +16,21 @@ A frontend YouTube clone built with React, featuring a responsive home feed, sea
 
 ### Search results page
 
-![Homepage](images/YouTube-Clone-Search-Results-Page.png)
+![Search results page](images/YouTube-Clone-Search-Results-Page.png)
 
 ## Features
 
 - Home feed displaying trending/popular videos via YouTube Data API
-- Infinite scroll with pagination using nextPageToken
-- Search bar with debounced autocomplete suggestions via Google's suggest endpoint
-- Keyboard navigation support for search suggestions (↑ ↓ Enter Escape)
-- Search results page with view counts, publish dates, and channel avatars
+- Infinite scroll with token-based pagination using nextPageToken
+- Videos with view counts, publish dates, and channel avatars
 - Video preview on hover (embedded autoplay iframe)
 - Max-resolution thumbnail upgrade with fallback chain
-- Responsive category tab bar with scroll buttons and tooltips
-- Collapsible sidebar with overlay mode on smaller screens
-- Animated sidebar slide-in using Framer Motion
-- Scroll lock when overlay sidebar is open
+- Search bar with debounced autocomplete suggestions via Google Suggest endpoint (Google Suggest API)
+- Keyboard navigation support for search suggestions (↑ ↓ Enter Escape)
+- Responsive category tab bar with scroll buttons
+- Search results page with view counts, publish dates, channel avatars, and video descriptions.
+- Expandable and collapsible sidebar with an overlay mode on smaller screens
+- Animated sidebar slide-in using Framer Motion and scroll lock when in overlay mode
 - Serverless API proxy (Vercel function) to handle CORS and protect API key
 
 ## Tech Stack
@@ -42,13 +42,15 @@ A frontend YouTube clone built with React, featuring a responsive home feed, sea
 - React Router
 - Framer Motion
 - react-icons
-- he (HTML entity decoding)
 
-### Backend/API
+### Backend
 
-- YouTube Data API v3 (search, channels, videos)
-- Google Suggest API (search autocomplete)
-- Vercel Serverless Function (CORS proxy)
+- Vercel Serverless Function (backend API proxy)
+
+### API
+
+- YouTube Data API v3 (search, channels, & videos)
+- Google Suggest API (search suggestions & autocomplete)
 
 ## Installation
 
