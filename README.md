@@ -12,6 +12,8 @@ A frontend YouTube clone built with React, featuring a responsive home feed, sea
 
 ![Homepage](images/YouTube-Clone-Homepage.png)
 
+<br>
+
 ### Search results page
 
 ![Homepage](images/YouTube-Clone-Search-Results-Page.png)
