@@ -4,7 +4,7 @@ A YouTube clone built with React and a Vercel serverless backend proxy, featurin
 
 ## Live Demo
 
-[Click here for a Demo](https://youtube-clone-blue-gamma.vercel.app/)
+[Click here for a Demo](https://youtube-clone-blue-gamma.vercel.app)
 
 ## Screenshots
 
